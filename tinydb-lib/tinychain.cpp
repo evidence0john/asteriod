@@ -192,6 +192,25 @@ namespace tinychain {
 		return counter;
 	}
 	
+	char *TINYCHAIN::getend(unsigned int id)
+	{
+#if TINYCHAIN_DEFAULT_POINTER == 4
+		unsigned int *id_pointer = (unsigned int *)list.aux;
+#endif				// TINYCHAIN_DEFAULT_POINTER
+		if (!id_pointer[id])
+			return 0;
+		int counter = 0;
+		unsigned int bid;
+ loop:
+		bid = id;
+		counter++;
+		if (id_pointer[bid] != id) {
+			id = id_pointer[bid];
+			goto loop;
+		}
+		return block(id - 1);
+	}
+	
 	int TINYCHAIN::load_text_file(unsigned int id, char *filename)
 	{
 		FILE *fp;
@@ -312,10 +331,10 @@ namespace tinychain {
 	{
 		int blks, len;
 		len = strlen(str);
+		if(!len)
+			return 0;
 		blks = ++len;
-		blks /= blen;
-		if (blks % blen) blks++;
-		return blks;
+		return (blks % blen)?(blks / blen) + 1 : blks / blen;
 	}
 	
 	int TINYCHAIN::info(unsigned int *para)

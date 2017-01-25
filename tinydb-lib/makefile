@@ -1,13 +1,13 @@
 cc = gcc
 cppc = g++
-op = -shared -fPIC -O3
-sources = 
+op = -shared -fPIC
+sources = simple_shm.c
 objs = tinylist.o swaplist.o tinychain.o sharedlist.o sharedchain.o
 
-asteroid : libasteroid.so clean
-.PHONY : asteroid
-libasteroid.so : $(objs)
-	$(cc) $(op) -o libasteroid.so $(objs)
+tinydb : libtinydb.so clean
+.PHONY : tinydb
+libtinydb.so : $(objs)
+	$(cc) $(op) -o libtinydb.so $(objs) $(sources)
 tinylist.o : tinylist.c
 	$(cc) $(op) -c tinylist.c
 swaplist.o : ./swaplist.c
