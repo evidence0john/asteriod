@@ -22,7 +22,7 @@ If pointer's value is the same as the record's(block's) ID ,it means this record
 So , the first record(block) of a chain is always kept , case it's ID is 0 .
 
 */
-#define TINYCHAIN_
+#define _TINYCHAIN_
 
 #define TINYCHAIN_DEFAULT_POINTER  4
 
@@ -47,7 +47,7 @@ So , the first record(block) of a chain is always kept , case it's ID is 0 .
 
 extern "C" {
 	#ifndef _TINYLIST_
-	#include "../include/tinylist.h"
+	#include "tinylist.h"
 	#endif
 }
 
@@ -67,6 +67,7 @@ namespace tinychain {
 		int write(unsigned int id, char *str);
 		int read(unsigned int id, char *buffer);
 		char *block(unsigned int id);
+		char *getend(unsigned int id);
 		int stroutput(void *fp, unsigned int id);
 		int del(unsigned int id);
 		int get_len(unsigned int id);

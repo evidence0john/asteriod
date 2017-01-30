@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Asteriod</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<div class="row100 bgded" style="background-image:url('images/tit.png');">
+<div class="wrapper row1">
+  <header id="header" class="clear"> 
+          <div id="logo" class="fl_left">
+        <h1><a href="index.html">Asteriod</a></h1>
+      </div>
+   
+  </header>
+</div>
+<div class="wrapper row3">
+  <main class="container clear"> 
+     <!-- main body -->
+      <div class="one_third">
+        <a href="index.html"><img src="images/all.png" alt=""></img></a>
+      </div>
+    <h2 class="heading uppercase bold font-x2">asteriod cgilua 分支</h2>
+    <p class="btmspace-50">本页面是一个静态页面，访问本页不会改变 lua 页面访问计数器</p>
+<center><h3>说明 - 请把它读完，我写了好久的啊 OTZ </br>--我仿佛听到你说：“太长，不看，滚”</h3></center>
+<p>你将要使用的 demo 的名字吧，我还没有想好,所以我简单的说说这是怎么用的吧 -_-#</p>
+<p>你可以像发帖或者发朋友圈一样发出一个主题，试试看发一个新的主题，可以用来测试，也可以留言给我，目前不支持评论和引用等功能。</p>
+<p>很明显，我懒得写编辑器，也懒得找现成的，虽然移植个 web 编辑器不复杂，但是懒癌不可避免。因此，编辑主题是直接用 html 的，如果你不会 html 不意味着你不能发出新的主题，好比你不会 js 无法在弹幕视频网发出高级弹幕，直接打字是可以的，用 html 标签修饰的话也是可以的，当然，js 代码也可以，不要太过分了，整崩溃了就很尴尬了。</p>
+<p>权限码并不等价与密码，是一种弱安全策略，只是计算了简单的 hash 数，不过你可以简单的认为这就是密码。如果不输入权限码，那么就没有权限，所有人都能看到你发出的内容。如果你设置了权限码，那么想要看你发送的内容就必须输入权限码，简单的说，就是设了个密码 desu...</p>
+<p>补充一下，如果你看代码，就会知道，额...就是说，如果你发出一个新的主题，会截取前 256 个字节，然后从第一个字符到第一个换行为止的内容作为标题，比如编辑了如下内容：</p>
+<p>hello world</br>这是一个 demo</br>&ltem&gt我是斜体字&lt/em&gt</p>
+<p>提交后，“hello world” 就会被当成是标题，如果浏览你发送的主题，html 标签就会有效，显示成下面这样：</p>
+<p>hello world
+这是一个 demo
+<em>我是斜体字</em></p>
+<p>细心的你一定发现了问题的，对，它并没有换行，所以啊，如果你懂 html 呐就不用解释了，不懂的话，告诉你 &lt/br&gt 就是换行，所以，如果这样编辑：</p>
+<p>hello world</br>&lt/br&gt这是一个 demo&lt/br&gt</br>&ltem&gt我是斜体字&lt/em&gt</p>
+<p>就有下面的输出了：</p>
+<p>hello world</br>这是一个 demo</br><em>我是斜体字</em></p>
+<p>最后，细心的你还发现，我为什么没有在第一行的末尾使用 &lt/br&gt，而是把它放在了下一行呢，那是因为在标题里使用 html 标签是不礼貌的，为什么不礼貌，因为我规定的(傲娇脸)</p>
+<h3><a href="host.cgi?read.lua">点我进入 Demo</a></h3>
+<p>细心的你可能还发现，今天这货一本正经啊，其实并不...</p>
+<p>这个页面下面居然没有显示你的 IP 地址，也没有计数器，嗨呀，你看看 URL 这是个静态页面啊，o(∩∩)o...哈哈</p>
+</main>
+<div class="wrapper row5">
+  <div id="copyright" class="clear"> 
+      <p class="fl_left"><img src="images/evi.png">2017.evi.evidence_john@outlook.com</p>
+    </div>
+</div>
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a> 
+<!-- JAVASCRIPTS -->
+<script src="layout/scripts/jquery.min.js"></script>
+<script src="layout/scripts/jquery.backtotop.js"></script>
+<!-- IE9 Placeholder Support -->
+<script src="layout/scripts/jquery.placeholder.min.js"></script>
+<!-- / IE9 Placeholder Support -->
+<script src="layout/scripts/jquery.flexslider-min.js"></script>
+</body>
+</html>

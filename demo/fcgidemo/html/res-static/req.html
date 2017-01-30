@@ -1,0 +1,15 @@
+<h3>服务器拒绝了你的访问 囧tz</h3>
+<script>
+function linker(){
+	var cruurl = window.location.href;
+	//alert(cruurl);
+	return cruurl;
+}
+document.getElementById("submx").action=linker();
+</script>
+<form method="post" action=" " id="submx" enctype="text/plain">
+   <p>请求的主题可能不是公开的，在下面输入正确的权限码完成请求</p>
+   <input id="access" name="access" size="20" type="text" maxlength="30"/></br>
+   <input name="sub" type="button" onclick="this.form.submit();" value="提交" />
+</form>
+</br>

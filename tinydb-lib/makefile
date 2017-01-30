@@ -1,13 +1,25 @@
 cc = gcc
 cppc = g++
 op = -shared -fPIC
+
 sources = simple_shm.c
+
 objs = tinylist.o swaplist.o tinychain.o sharedlist.o sharedchain.o
 
-tinydb : libtinydb.so clean
-.PHONY : tinydb
+emobjs = tinylist.o swaplist.o tinychain.o
+#tinydb module
+tinydb : libtinydb.so
+#tinydb embed version, not support IPC
+embed : libembedtdb.so
+
+all : libtinydb.so libembedtdb.so
+#default = make all
+.PHONY : all
+
 libtinydb.so : $(objs)
 	$(cc) $(op) -o libtinydb.so $(objs) $(sources)
+libembedtdb.so : $(emobjs)
+	$(cc) $(op) -o libembedtdb.so $(emobjs)
 tinylist.o : tinylist.c
 	$(cc) $(op) -c tinylist.c
 swaplist.o : ./swaplist.c

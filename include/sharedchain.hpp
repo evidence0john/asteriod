@@ -1,5 +1,7 @@
-#include "tinychain.hpp"
-using namespace tinychain;
+#ifndef _TINYCHAIN_
+	#include "tinychain.hpp"
+#endif
+
 /*
 Shared data chain
 FLAG-LBRDB
@@ -17,6 +19,8 @@ FLAG-LBRDB
 #define SHM_ERR_ALLOC	-10
 #define SHM_ERR_LINK	-11
 #define SC_ERR_EXPORT	-20
+
+using namespace tinychain;
 
 int _share_chain(TINYCHAIN * chain, char *logfile);
 int create_shared_chain(int blklen, int max_blkID, char *name, char *logfile);
