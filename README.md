@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 # asteroid
-<h2>欢迎加入 asteroid!</h2>
+
 <p>asteroid 是一个轻型的计算工具集，提供小型可嵌入数据库、简单自然语言处理、CGI等方面的支持，核心部分主要使用 c/c++ 编写，大部分组件可以兼容在 windows 或 linux 等操作系统，某些组件甚至不需要操作系统。目前直接提供 lua 脚本语言的库的支持。你能够使用 asteroid 的组件建立多种应用：
 <li>web 应用，比如一个 bbs，或者 blog，也能够承载一些线上交互式服务</li>
 <li>APP 服务器，为移动客户端提供数据交互服务</li>
