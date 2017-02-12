@@ -49,8 +49,8 @@ int link_list_heap(LIST * list, char *str);
 char *create_list(char *name, unsigned int blen, unsigned int aux_blk,
 		  unsigned int record);
 int list_write_binary(char *slist, unsigned int id, char *str,
-		      unsigned int len);
-int list_write_string(char *slist, unsigned int id, char *str);
+		      unsigned int len, int offset);
+int list_write_string(char *slist, unsigned int id, char *str, int offset);
 void list_delete_record(char *slist, unsigned int id);
 char *list_get_record(char *slist, unsigned int id);
 char *list_get_aux(char *slist, unsigned int id);

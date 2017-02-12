@@ -74,7 +74,7 @@ int _write(lua_State * L)
 		return 1;
 	}
 	lua_pushinteger(L, list_write_string(current_slist + SHARED_LIST_FLAGS,
-			lua_tointeger(L, 1), (char *)lua_tostring(L, 2)));
+			lua_tointeger(L, 1), (char *)lua_tostring(L, 2), lua_tointeger(L, 3)));
 	return 1;
 }
 
@@ -86,7 +86,7 @@ int _read(lua_State * L)
 		return 1;
 	}
 	strcpy(read_buffer, list_get_record(current_slist + SHARED_LIST_FLAGS,
-							lua_tointeger(L, 1)));
+							lua_tointeger(L, 1)) + lua_tointeger(L, 2));
 	lua_pushstring(L, read_buffer);
 	return 1;
 }

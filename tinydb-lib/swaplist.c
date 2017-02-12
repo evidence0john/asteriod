@@ -119,21 +119,22 @@ char *create_list(char *name, unsigned int blen, unsigned int aux_blk,
 	return pool;
 }
 
-int list_write_binary(char *slist, unsigned int id, char *str, unsigned int len)
+int list_write_binary(char *slist, unsigned int id, char *str, unsigned int len,
+		      int offset)
 {
 	LIST trans;
 	sync_list_info(&trans, slist);
 	link_list_heap(&trans, slist);
-	memcpy(LIST_get_mem_record(&trans, id), str, len);
+	memcpy(LIST_get_mem_record(&trans, id) + offset, str, len);
 	return 0;
 }
 
-int list_write_string(char *slist, unsigned int id, char *str)
+int list_write_string(char *slist, unsigned int id, char *str, int offset)
 {
 	LIST trans;
 	sync_list_info(&trans, slist);
 	link_list_heap(&trans, slist);
-	strcpy(LIST_get_mem_record(&trans, id), str);
+	strcpy(LIST_get_mem_record(&trans, id) + offset, str);
 	return 0;
 }
 
