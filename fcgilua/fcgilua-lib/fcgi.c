@@ -128,7 +128,7 @@ find_start:
 		lua_pushinteger(L, ERR_FILE_OPEN);
 		return 1;
 	}
-	fwrite(fstart, len, 1, fp);
+	fwrite(fstart, 1, len, fp);
 	fclose(fp);
 	free(buffer);
 	lua_pushinteger(L, len);
