@@ -21,7 +21,6 @@
 #ifndef UNKNOWN_OPT
 	#define str_copy strcpy
 	#define str_length strlen
-	#define mem_copy memcpy
 #endif
 
 #ifdef WIN_NT
@@ -34,14 +33,6 @@
 	#define _remove_directory rmdir
 	#define getch getchar
 #endif
-
-#ifdef UNKNOWN_OPT
-	#define mem_copy memcpy
-	int str_length(char *str);	//return length of string
-	void str_copy(char *str0, char *str1);	//copy str1 => str0
-#endif
-
-#define SWAP(x,y) {int t;t=x;x=y;y=t;}
 
 #ifdef UNKNOWN_OPT
 	static int str_length(char *str)
@@ -71,6 +62,9 @@
 	}
 	*/
 #endif
+
+#define SWAP(x,y) {int t;t=x;x=y;y=t;}
+#define mem_copy memcpy
 
 static void array_init(char *str, int length)
 {
