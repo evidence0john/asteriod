@@ -52,12 +52,12 @@ extern "C" {
 }
 
 namespace tinychain {
-	int write_data(LIST * list, unsigned int id, int length, char *str);
-	int write_data(LIST * list, unsigned int id, char *str);
-	int read_data(LIST * list, unsigned int id, char *buffer);
-	int output_string(LIST * list, unsigned int id);
-	int delete_data(LIST * list, unsigned int id);
-	int find_available_id(LIST * list);
+	int write_data(LIST *list, unsigned int id, int length, char *str);
+	int write_data(LIST *list, unsigned int id, char *str);
+	int read_data(LIST *list, unsigned int id, char *buffer);
+	int output_string(LIST *list, unsigned int id);
+	int delete_data(LIST *list, unsigned int id);
+	int find_available_id(LIST *list);
 
 	typedef class {
  public:

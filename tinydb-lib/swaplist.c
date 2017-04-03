@@ -1,9 +1,12 @@
+#ifdef __cplusplus
+	extern "C" {
+#endif
 #include "string.h"
 #include "stdlib.h"
 #include "tinylist.h"
 #include "swaplist.h"
 
-unsigned int calc_list_swap_length(LIST * list)
+unsigned int calc_list_swap_length(LIST *list)
 {
 	unsigned int i, length = 0;
 	length += LIST_SINFO_BUFFER;
@@ -21,7 +24,7 @@ unsigned int calc_list_swap_length(LIST * list)
 	return length;
 }
 
-int upload_list_info(LIST * list, char *str)
+int upload_list_info(LIST *list, char *str)
 {
 	char list_info_uchar[LIST_SINFO_BUFFER];
 	unsigned int *list_info_uint = (unsigned int *)list_info_uchar;
@@ -37,7 +40,7 @@ int upload_list_info(LIST * list, char *str)
 	return 0;
 }
 
-int upload_list_heap(LIST * list, char *str)
+int upload_list_heap(LIST *list, char *str)
 {
 	int i;
 	str += LIST_SINFO_BUFFER;
@@ -62,7 +65,7 @@ int upload_list_heap(LIST * list, char *str)
 	return 0;
 }
 
-int sync_list_info(LIST * list, char *str)
+int sync_list_info(LIST *list, char *str)
 {
 	char *list_info_uchar = str;
 	unsigned int *list_info_uint = (unsigned int *)list_info_uchar;
@@ -77,7 +80,7 @@ int sync_list_info(LIST * list, char *str)
 	return 0;
 }
 
-int link_list_heap(LIST * list, char *str)
+int link_list_heap(LIST *list, char *str)
 {
 	int i;
 	str += LIST_SINFO_BUFFER;
@@ -161,3 +164,6 @@ char *list_get_aux(char *slist, unsigned int id)
 	link_list_heap(&trans, slist);
 	return LIST_get_aux(&trans, id);
 }
+#ifdef __cplusplus
+	}
+#endif

@@ -6,7 +6,7 @@ extern "C" {
 }
 #include "tinychain.hpp"
 namespace tinychain {
-	int write_data(LIST * list, unsigned int id, int length, char *str)
+	int write_data(LIST *list, unsigned int id, int length, char *str)
 	{
 #if TINYCHAIN_DEFAULT_POINTER == 4
 		unsigned int *id_pointer = (unsigned int *)list->aux;
@@ -39,12 +39,12 @@ namespace tinychain {
 		return block_counter;
 	}
 	
-	int write_data(LIST * list, unsigned int id, char *str)
+	int write_data(LIST *list, unsigned int id, char *str)
 	{
 		return write_data(list, id, strlen(str) + 1, str);
 	}
 	
-	int read_data(LIST * list, unsigned int id, char *buffer)
+	int read_data(LIST *list, unsigned int id, char *buffer)
 	{
 #if TINYCHAIN_DEFAULT_POINTER == 4
 		unsigned int *id_pointer = (unsigned int *)list->aux;
@@ -65,7 +65,7 @@ namespace tinychain {
 		return counter;
 	}
 	
-	int output_string(LIST * list, void *fp, unsigned int id)
+	int output_string(LIST *list, void *fp, unsigned int id)
 	{
 #if TINYCHAIN_DEFAULT_POINTER == 4
 		unsigned int *id_pointer = (unsigned int *)list->aux;
@@ -81,7 +81,7 @@ namespace tinychain {
 		return 0;
 	}
 	
-	int delete_data(LIST * list, unsigned int id)
+	int delete_data(LIST *list, unsigned int id)
 	{
 #if TINYCHAIN_DEFAULT_POINTER == 4
 		unsigned int *id_pointer = (unsigned int *)list->aux;
@@ -116,7 +116,7 @@ namespace tinychain {
 	   return 0;
 	   }
 	 */
-	int find_available_id(LIST * list)
+	int find_available_id(LIST *list)
 	{
 #if TINYCHAIN_DEFAULT_POINTER == 4
 		unsigned int *id_pointer = (unsigned int *)list->aux;

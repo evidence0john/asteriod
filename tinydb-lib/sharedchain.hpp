@@ -22,7 +22,7 @@ FLAG-LBRDB
 
 using namespace tinychain;
 
-int _share_chain(TINYCHAIN * chain, char *logfile);
+int _share_chain(TINYCHAIN *chain, char *logfile);
 int create_shared_chain(int blklen, int max_blkID, char *name, char *logfile);
 int dump_shared_chain(int schainlen, char *name);
 int load_shared_chain(int schainlen, char *name);

@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+	extern "C" {
+#endif
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
@@ -64,3 +67,6 @@ int load_shared_list(char *mem, char *filename)
 {
 	return mem_load(mem, filename);
 }
+#ifdef __cplusplus
+	}
+#endif

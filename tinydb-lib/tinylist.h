@@ -95,8 +95,8 @@ typedef struct {
 #define LIST_min_item_length			5
 
 #define LIST_clear_mode_flag(list) list->mode_flag=0;
-void LIST_set_mode_flag(LIST * list, unsigned char mode_flag);
-void LIST_output_error_log(LIST * list);
+void LIST_set_mode_flag(LIST *list, unsigned char mode_flag);
+void LIST_output_error_log(LIST *list);
 void LIST_print_debug_info(LIST list);
 
 //common//
@@ -106,9 +106,9 @@ void LIST_print_debug_info(LIST list);
 //list//
 
 #define LIST_INFO_BUFFER 512
-void LIST_set_aux_blk(LIST * list, unsigned int aux_blk);
+void LIST_set_aux_blk(LIST *list, unsigned int aux_blk);
 
-void LIST_set_head(LIST * list, char *str);
+void LIST_set_head(LIST *list, char *str);
 LIST LIST_new_list(unsigned int length, unsigned int nrecord,
 		   unsigned int aux_blk);
 LIST LIST_new_list_compact(unsigned int length, unsigned int aux_blk,
@@ -116,35 +116,35 @@ LIST LIST_new_list_compact(unsigned int length, unsigned int aux_blk,
 LIST LIST_new_list_blklist(unsigned int blen, unsigned int aux_blk,
 				 unsigned int nrecord);
 
-LIST LIST_clone(LIST * list);
+LIST LIST_clone(LIST *list);
 void LIST_delete(LIST list);
 
 #ifdef HAVE_FILESYSTEM
 	void LIST_export(LIST list);
-	unsigned char LIST_import(LIST * list, char *filename);
+	unsigned char LIST_import(LIST *list, char *filename);
 #endif
 
 //record//
 
 LIST_RECORD new_LIST_RECORD(unsigned int length, unsigned int aux_blk);
-LIST_RECORD get_LIST_RECORD(LIST * list, unsigned int eidc);
+LIST_RECORD get_LIST_RECORD(LIST *list, unsigned int eidc);
 /*write LIST_RECORD to a compact list may cause error*/
-void write_LIST_RECORD(LIST * list, LIST_RECORD * record,
+void write_LIST_RECORD(LIST *list, LIST_RECORD *record,
 			unsigned int eidc);
-unsigned char add_LIST_RECORD_auto(LIST * list, LIST_RECORD * record);
-unsigned char LIST_swap_blklist_record(LIST * list, unsigned int eidc0,
+unsigned char add_LIST_RECORD_auto(LIST *list, LIST_RECORD *record);
+unsigned char LIST_swap_blklist_record(LIST *list, unsigned int eidc0,
 					unsigned int eidc1);
-void delete_LIST_RECORD(LIST_RECORD * record);
-char remove_LIST_RECORD(LIST * list, unsigned int eidc);	//remove record only for blklist
-char *LIST_get_mem_record(LIST * list, unsigned int eidc);
-char *LIST_get_aux(LIST * list, unsigned int eidc);
-void LIST_copy_aux(LIST * list, unsigned int eidc, char *str);
-void LIST_copy_mem_record(LIST * list, unsigned int eidc, char *str);
-void LIST_copy_mem_record_bin(LIST * list, unsigned int eidc, char *str,
+void delete_LIST_RECORD(LIST_RECORD *record);
+char remove_LIST_RECORD(LIST *list, unsigned int eidc);	//remove record only for blklist
+char *LIST_get_mem_record(LIST *list, unsigned int eidc);
+char *LIST_get_aux(LIST *list, unsigned int eidc);
+void LIST_copy_aux(LIST *list, unsigned int eidc, char *str);
+void LIST_copy_mem_record(LIST *list, unsigned int eidc, char *str);
+void LIST_copy_mem_record_bin(LIST *list, unsigned int eidc, char *str,
 			       unsigned int length);
-unsigned char LIST_write_mem(LIST * list, unsigned int eidc, char *str,
+unsigned char LIST_write_mem(LIST *list, unsigned int eidc, char *str,
 			      unsigned int length);
-unsigned int LIST_search_by_aux(LIST * list, char *key);
+unsigned int LIST_search_by_aux(LIST *list, char *key);
 
 //hash di32//
 
@@ -152,23 +152,23 @@ unsigned int LIST_search_by_aux(LIST * list, char *key);
 #define LIST_HASH_DI32   4
 
 void LIST_set_hash_seed_di32(unsigned int seed);
-unsigned char LIST_hash_table_init(LIST * list, unsigned int length);
-unsigned char LIST_creat_hash_table_di32(LIST * list);
-unsigned char LIST_auto_create_hash_di32(LIST * list);
-unsigned char LIST_create_hash_di32_str(LIST * list);
-unsigned char LIST_create_hash_di32_bin(LIST * list, unsigned int length);
-unsigned int LIST_get_hash_di32(LIST * list, unsigned int eidc);
-unsigned int LIST_record_create_hash_di32_bin(LIST * list, unsigned int eidc,
+unsigned char LIST_hash_table_init(LIST *list, unsigned int length);
+unsigned char LIST_creat_hash_table_di32(LIST *list);
+unsigned char LIST_auto_create_hash_di32(LIST *list);
+unsigned char LIST_create_hash_di32_str(LIST *list);
+unsigned char LIST_create_hash_di32_bin(LIST *list, unsigned int length);
+unsigned int LIST_get_hash_di32(LIST *list, unsigned int eidc);
+unsigned int LIST_record_create_hash_di32_bin(LIST *list, unsigned int eidc,
 					       unsigned int length);
-unsigned int LIST_record_create_hash_di32_str(LIST * list,
+unsigned int LIST_record_create_hash_di32_str(LIST *list,
 					       unsigned int eidc);
-unsigned int LIST_record_auto_create_hash_di32(LIST * list,
+unsigned int LIST_record_auto_create_hash_di32(LIST *list,
 						unsigned int eidc);
-unsigned int LIST_search_hast_table_di32(LIST * list, unsigned int nhash,
+unsigned int LIST_search_hast_table_di32(LIST *list, unsigned int nhash,
 					  unsigned int point);
-unsigned int LIST_search_str_di32(LIST * list, char *str,
+unsigned int LIST_search_str_di32(LIST *list, char *str,
 				   unsigned int point);
-unsigned int LIST_search_bin_di32(LIST * list, char *str, unsigned int point,
+unsigned int LIST_search_bin_di32(LIST *list, char *str, unsigned int point,
 				   unsigned int length);
 				   
 //quick hash//
@@ -191,9 +191,9 @@ int LIST_qhash_check_crash(char *str);
 int LIST_qhash_calc_offset(unsigned int max);
 unsigned int LIST_qhash(char *str, unsigned int seed, unsigned int length,
 			 unsigned int max, unsigned char offset);
-unsigned int LIST_qhash_test(LIST * list, char *str, unsigned int length);
-unsigned int LIST_qhash_search_str(LIST * list, char *str);
-unsigned int LIST_qhash_search_bin(LIST * list, char *str,
+unsigned int LIST_qhash_test(LIST *list, char *str, unsigned int length);
+unsigned int LIST_qhash_search_str(LIST *list, char *str);
+unsigned int LIST_qhash_search_bin(LIST *list, char *str,
 				    unsigned int length);
 
 //sort //
@@ -213,4 +213,4 @@ void LIST_set_sort_mode(char mode);
 char LIST_word_compare(char *word0, char *word1);
 /*This function will sorting your list at the mode set by LIST_set_sort_mode
 This function using Shellsort algorithm ,you may using faster algorithm*/
-void LIST_auto_sort(LIST * list);
+void LIST_auto_sort(LIST *list);

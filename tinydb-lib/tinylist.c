@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+	extern "C" {
+#endif
 #include "tinylist.h"
 
 #include "stdio.h"
@@ -242,14 +245,14 @@ static void heap_free(HEAP heap)
 	free(heap.str);
 }
 
-static void heap_reset(HEAP * heap)
+static void heap_reset(HEAP *heap)
 {
 	heap->point = 0;
 	heap->str[0] = 0;
 }
 
 #ifdef HAVE_FILESYSTEM
-	static void heap_output_file(HEAP * heap, char *filename)
+	static void heap_output_file(HEAP *heap, char *filename)
 	{
 		int length;
 		FILE *fp;
@@ -259,7 +262,7 @@ static void heap_reset(HEAP * heap)
 		fclose(fp);
 	}
 
-	static void heap_output_file_bin(HEAP * heap, char *filename)
+	static void heap_output_file_bin(HEAP *heap, char *filename)
 	{
 		int length;
 		FILE *fp;
@@ -270,7 +273,7 @@ static void heap_reset(HEAP * heap)
 	}
 
 	#ifdef UNIX_FILE
-		static unsigned char file_to_heap(HEAP * heap, char *filename)
+		static unsigned char file_to_heap(HEAP *heap, char *filename)
 		{
 			heap->point = load_file(heap->str, filename);
 			return 0;
@@ -287,7 +290,7 @@ static HEAP build_heap(int length)
 	return heap;
 }
 
-static unsigned char heap_line_store(char *str, HEAP * heap)
+static unsigned char heap_line_store(char *str, HEAP *heap)
 {
 	int i, l;
 	l = str_length(str);
@@ -301,12 +304,12 @@ static unsigned char heap_line_store(char *str, HEAP * heap)
 
 //list//
 
-void LIST_set_aux_blk(LIST * list, unsigned int aux_blk)
+void LIST_set_aux_blk(LIST *list, unsigned int aux_blk)
 {
 	list->aux_blk = aux_blk;
 }
 
-void LIST_set_head(LIST * list, char *str)
+void LIST_set_head(LIST *list, char *str)
 {
 	str_copy(list->head, str);
 }
@@ -381,7 +384,7 @@ void LIST_delete(LIST list)
 		free(list.hash_table);
 }
 
-LIST LIST_clone(LIST * list)
+LIST LIST_clone(LIST *list)
 {
 	LIST clist;
 	clist.aux_blk = list->aux_blk;
@@ -436,7 +439,7 @@ LIST LIST_clone(LIST * list)
 }
 
 #ifdef HAVE_FILESYSTEM
-	unsigned char LIST_import(LIST * list, char *filename)
+	unsigned char LIST_import(LIST *list, char *filename)
 	{
 		HEAP heap;
 		chdir(filename);
@@ -512,7 +515,7 @@ LIST_RECORD new_LIST_RECORD(unsigned int length, unsigned int aux_blk)
 	return record;
 }
 
-void delete_LIST_RECORD(LIST_RECORD * record)
+void delete_LIST_RECORD(LIST_RECORD *record)
 {
 	free(record->record);
 	if (record->rrhl[1] != 0)
@@ -521,7 +524,7 @@ void delete_LIST_RECORD(LIST_RECORD * record)
 		free(record->hash);
 }
 
-void item_to_LIST_RECORD(LIST_RECORD * record, char *item,
+void item_to_LIST_RECORD(LIST_RECORD *record, char *item,
 			  unsigned int length)
 {
 	length -= record->rrhl[1];
@@ -529,7 +532,7 @@ void item_to_LIST_RECORD(LIST_RECORD * record, char *item,
 	str_over_write(record->aux, item + length, 0, record->rrhl[1]);
 }
 
-LIST_RECORD get_LIST_RECORD(LIST * list, unsigned int eidc)
+LIST_RECORD get_LIST_RECORD(LIST *list, unsigned int eidc)
 {
 	LIST_RECORD record;
 	unsigned int length;
@@ -552,7 +555,7 @@ LIST_RECORD get_LIST_RECORD(LIST * list, unsigned int eidc)
 	return record;
 }
 
-void write_LIST_RECORD(LIST * list, LIST_RECORD * record, unsigned int eidc)
+void write_LIST_RECORD(LIST *list, LIST_RECORD *record, unsigned int eidc)
 {
 	unsigned int linker;
 	if (list->mode_flag & LIST_pool_blklist_mode)
@@ -568,7 +571,7 @@ void write_LIST_RECORD(LIST * list, LIST_RECORD * record, unsigned int eidc)
 	}
 }
 
-unsigned char add_LIST_RECORD_auto(LIST * list, LIST_RECORD * record)
+unsigned char add_LIST_RECORD_auto(LIST *list, LIST_RECORD *record)
 {
 	if (list->eidc + 1 > list->record) {
 		list->error_check |= LIST_REFLECTION_FULL;
@@ -579,7 +582,7 @@ unsigned char add_LIST_RECORD_auto(LIST * list, LIST_RECORD * record)
 	return list->error_check;
 }
 
-unsigned char LIST_swap_blklist_record(LIST * list, unsigned int eidc0,
+unsigned char LIST_swap_blklist_record(LIST *list, unsigned int eidc0,
 					unsigned int eidc1)
 {
 	LIST_RECORD r0;
@@ -602,7 +605,7 @@ unsigned char LIST_swap_blklist_record(LIST * list, unsigned int eidc0,
 	return 0;
 }
 
-char remove_LIST_RECORD(LIST * list, unsigned int eidc)
+char remove_LIST_RECORD(LIST *list, unsigned int eidc)
 {
 	if (!(list->mode_flag & LIST_pool_blklist_mode))
 		return -1;
@@ -613,7 +616,7 @@ char remove_LIST_RECORD(LIST * list, unsigned int eidc)
 	return 0;
 }
 
-char *LIST_get_mem_record(LIST * list, unsigned int eidc)
+char *LIST_get_mem_record(LIST *list, unsigned int eidc)
 {
 	char *linker;
 	if (list->mode_flag & LIST_pool_blklist_mode)
@@ -623,21 +626,21 @@ char *LIST_get_mem_record(LIST * list, unsigned int eidc)
 	return linker;
 }
 
-char *LIST_get_aux(LIST * list, unsigned int eidc)
+char *LIST_get_aux(LIST *list, unsigned int eidc)
 {
 	char *linker;
 	linker = list->aux + list->aux_blk * eidc;
 	return linker;
 }
 
-void LIST_copy_aux(LIST * list, unsigned int eidc, char *str)
+void LIST_copy_aux(LIST *list, unsigned int eidc, char *str)
 {
 	char *linker;
 	linker = list->aux + list->aux_blk * eidc;
 	str_over_write(str, linker, 0, list->aux_blk);
 }
 
-void LIST_copy_mem_record(LIST * list, unsigned int eidc, char *str)
+void LIST_copy_mem_record(LIST *list, unsigned int eidc, char *str)
 {
 	char *linker;
 	if (list->mode_flag & LIST_pool_blklist_mode)
@@ -647,7 +650,7 @@ void LIST_copy_mem_record(LIST * list, unsigned int eidc, char *str)
 	str_copy(str, linker);
 }
 
-void LIST_copy_mem_record_bin(LIST * list, unsigned int eidc, char *str,
+void LIST_copy_mem_record_bin(LIST *list, unsigned int eidc, char *str,
 			       unsigned int length)
 {
 	char *linker;
@@ -658,14 +661,14 @@ void LIST_copy_mem_record_bin(LIST * list, unsigned int eidc, char *str,
 	str_over_write(str, linker, 0, length);
 }
 
-unsigned char LIST_write_mem(LIST * list, unsigned int eidc, char *str,
+unsigned char LIST_write_mem(LIST *list, unsigned int eidc, char *str,
 			      unsigned int length)
 {
 	str_over_write(LIST_get_mem_record(list, eidc), str, 0, length);
 	return list->error_check;
 }
 
-unsigned int LIST_search_by_aux(LIST * list, char *key)
+unsigned int LIST_search_by_aux(LIST *list, char *key)
 {
 	char e = 1;
 	unsigned int i;
@@ -691,7 +694,7 @@ void LIST_set_hash_seed_di32(unsigned int seed)
 	LIST_hash_seed_di32 = seed;
 }
 
-unsigned char LIST_hash_table_init(LIST * list, unsigned int length)
+unsigned char LIST_hash_table_init(LIST *list, unsigned int length)
 {
 	list->hash_table = (char *)malloc(length);
 	if (list->hash_table == NULL) {
@@ -703,12 +706,12 @@ unsigned char LIST_hash_table_init(LIST * list, unsigned int length)
 	return list->error_check;
 }
 
-unsigned char LIST_creat_hash_table_di32(LIST * list)
+unsigned char LIST_creat_hash_table_di32(LIST *list)
 {
 	return LIST_hash_table_init(list, list->record * 4);
 }
 
-unsigned int LIST_record_create_hash_di32_bin(LIST * list, unsigned int eidc,
+unsigned int LIST_record_create_hash_di32_bin(LIST *list, unsigned int eidc,
 					       unsigned int length)
 {
 	unsigned int *hash_table = (unsigned int *)list->hash_table;
@@ -718,7 +721,7 @@ unsigned int LIST_record_create_hash_di32_bin(LIST * list, unsigned int eidc,
 	return hash_table[eidc];
 }
 
-unsigned int LIST_record_create_hash_di32_str(LIST * list, unsigned int eidc)
+unsigned int LIST_record_create_hash_di32_str(LIST *list, unsigned int eidc)
 {
 	unsigned int *hash_table = (unsigned int *)list->hash_table;
 	hash_table[eidc] =
@@ -728,7 +731,7 @@ unsigned int LIST_record_create_hash_di32_str(LIST * list, unsigned int eidc)
 	return hash_table[eidc];
 }
 
-unsigned int LIST_record_auto_create_hash_di32(LIST * list,
+unsigned int LIST_record_auto_create_hash_di32(LIST *list,
 						unsigned int eidc)
 {
 	unsigned int *hash_table = (unsigned int *)list->hash_table;
@@ -748,7 +751,7 @@ unsigned int LIST_record_auto_create_hash_di32(LIST * list,
 	return hash_table[eidc];
 }
 
-unsigned char LIST_auto_create_hash_di32(LIST * list)
+unsigned char LIST_auto_create_hash_di32(LIST *list)
 {
 	int i;
 	for (i = 0; i <= list->eidc; i++)
@@ -756,7 +759,7 @@ unsigned char LIST_auto_create_hash_di32(LIST * list)
 	return list->error_check;
 }
 
-unsigned char LIST_create_hash_di32_str(LIST * list)
+unsigned char LIST_create_hash_di32_str(LIST *list)
 {
 	int i;
 	for (i = 0; i <= list->eidc; i++)
@@ -764,7 +767,7 @@ unsigned char LIST_create_hash_di32_str(LIST * list)
 	return list->error_check;
 }
 
-unsigned char LIST_create_hash_di32_bin(LIST * list, unsigned int length)
+unsigned char LIST_create_hash_di32_bin(LIST *list, unsigned int length)
 {
 	int i;
 	for (i = 0; i <= list->eidc; i++)
@@ -772,14 +775,14 @@ unsigned char LIST_create_hash_di32_bin(LIST * list, unsigned int length)
 	return list->error_check;
 }
 
-unsigned int LIST_get_hash_di32(LIST * list, unsigned int eidc)
+unsigned int LIST_get_hash_di32(LIST *list, unsigned int eidc)
 {
 	int *hash;
 	hash = (int *)list->hash_table;
 	return hash[eidc];
 }
 
-unsigned int LIST_search_hast_table_di32(LIST * list, unsigned int nhash,
+unsigned int LIST_search_hast_table_di32(LIST *list, unsigned int nhash,
 					  unsigned int point)
 {
 	int *pool = (int *)list->hash_table;
@@ -794,7 +797,7 @@ unsigned int LIST_search_hast_table_di32(LIST * list, unsigned int nhash,
 	return eidc;
 }
 
-unsigned int LIST_search_str_di32(LIST * list, char *str, unsigned int point)
+unsigned int LIST_search_str_di32(LIST *list, char *str, unsigned int point)
 {
 	return LIST_search_hast_table_di32(list,
 					    DJBHashKey(str,
@@ -802,7 +805,7 @@ unsigned int LIST_search_str_di32(LIST * list, char *str, unsigned int point)
 					    point);
 }
 
-unsigned int LIST_search_bin_di32(LIST * list, char *str, unsigned int point,
+unsigned int LIST_search_bin_di32(LIST *list, char *str, unsigned int point,
 				   unsigned int length)
 {
 	return LIST_search_hast_table_di32(list,
@@ -880,7 +883,7 @@ unsigned int LIST_qhash(char *str, unsigned int seed, unsigned int length,
 	return nhash;
 }
 
-unsigned int LIST_qhash_test(LIST * list, char *str, unsigned int length)
+unsigned int LIST_qhash_test(LIST *list, char *str, unsigned int length)
 {
 	unsigned int qhash, seed;
 	int offset = LIST_qhash_calc_offset(list->record);
@@ -896,12 +899,12 @@ unsigned int LIST_qhash_test(LIST * list, char *str, unsigned int length)
 	return qhash;
 }
 
-unsigned int LIST_qhash_search_str(LIST * list, char *str)
+unsigned int LIST_qhash_search_str(LIST *list, char *str)
 {
 	return LIST_qhash_search_bin(list, str, str_length(str));
 }
 
-unsigned int LIST_qhash_search_bin(LIST * list, char *str,
+unsigned int LIST_qhash_search_bin(LIST *list, char *str,
 				    unsigned int length)
 {
 	int qhash, seed;
@@ -945,7 +948,7 @@ char LIST_word_compare(char *word0, char *word1)
 	}
 }
 
-void LIST_auto_sort(LIST * list)
+void LIST_auto_sort(LIST *list)
 {
 	int i, j, k, gap;
 	gap = list->eidc / 2;
@@ -973,13 +976,13 @@ void LIST_auto_sort(LIST * list)
 
 //debug//
 
-void LIST_set_mode_flag(LIST * list, unsigned char mode_flag)
+void LIST_set_mode_flag(LIST *list, unsigned char mode_flag)
 {
 	list->mode_flag |= mode_flag;
 }
 
 #ifdef HAVE_FILESYSTEM
-	void LIST_output_error_log(LIST * list)
+	void LIST_output_error_log(LIST *list)
 	{
 		HEAP heap = build_heap(2048);
 		char str[256];
@@ -1036,3 +1039,6 @@ void LIST_print_debug_info(LIST list)
 		}
 	}
 }
+#ifdef __cplusplus
+	}
+#endif

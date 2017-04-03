@@ -11,7 +11,7 @@ extern "C" {
 
 using namespace tinychain;
 
-int _share_chain(TINYCHAIN * chain, char *logfile)
+int _share_chain(TINYCHAIN *chain, char *logfile)
 {
 	char *shm, *rshm, *name;
 	char namebuffer[SHARED_CHAIN_NAME_LEN];

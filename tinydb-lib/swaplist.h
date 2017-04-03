@@ -41,11 +41,11 @@ string:
 |head|mem_pool|aux|map|hash_table
 */
 
-unsigned int calc_list_swap_length(LIST * list);
-int upload_list_info(LIST * list, char *str);
-int upload_list_heap(LIST * list, char *str);
-int sync_list_info(LIST * list, char *str);
-int link_list_heap(LIST * list, char *str);
+unsigned int calc_list_swap_length(LIST *list);
+int upload_list_info(LIST *list, char *str);
+int upload_list_heap(LIST *list, char *str);
+int sync_list_info(LIST *list, char *str);
+int link_list_heap(LIST *list, char *str);
 char *create_list(char *name, unsigned int blen, unsigned int aux_blk,
 		  unsigned int record);
 int list_write_binary(char *slist, unsigned int id, char *str,
