@@ -16,12 +16,6 @@
 
 //#define UNKNOWN_OPT
 
-#ifndef __cplusplus
-	#define bool    _Bool
-	#define true    1
-	#define false   0
-#endif
-
 /*****************Mode_flag*****************/
 /*
 unsigned char mode_flag :	0 1 2 3 4 5 6 7
@@ -210,7 +204,9 @@ unsigned int LIST_qhash_search_bin(LIST *list, char *str,
 /*Before sorting ,you must set sort mode first ,using LIST_set_sort_mode*/
 void LIST_set_sort_mode(char mode);
 /*LIST_set_sort_mode will set a mode flag to switch the work mode of LIST_word_compare*/
-char LIST_word_compare(char *word0, char *word1);
+int LIST_word_compare(char *word0, char *word1);
 /*This function will sorting your list at the mode set by LIST_set_sort_mode
 This function using Shellsort algorithm ,you may using faster algorithm*/
 void LIST_auto_sort(LIST *list);
+/*This function allow you use your own compare method to sort the list*/
+void LIST_user_sort(LIST * list, int m, int n, int (*compare) (char *, char *));

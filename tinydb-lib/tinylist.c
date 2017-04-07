@@ -66,7 +66,6 @@
 	*/
 #endif
 
-#define SWAP(x,y) {int t;t=x;x=y;y=t;}
 #define mem_copy memcpy
 
 static void array_init(char *str, int length)
@@ -100,22 +99,6 @@ static int block_key_compare(char *key1, char *key2, int block)
 	}
 	return ex_num;
 }
-
-#ifndef _LOW_LEVEL_CPU
-	static void int_to_char(int num, char *key)
-	{
-		key[0] = num;
-		key[1] = num >> 8;
-		key[2] = num >> 16;
-		key[3] = num >> 24;
-		//key[4]=0;
-	}
-
-	static int char_to_int(char *key)
-	{
-		return *(int *)key;
-	}
-#endif
 
 #ifdef HAVE_FILESYSTEM
 	static int load_file(char *file, char *filename)
@@ -932,7 +915,7 @@ void LIST_set_sort_mode(char mode)
 	LIST_SORT_MODE = mode;
 }
 
-char LIST_word_compare(char *word0, char *word1)
+int LIST_word_compare(char *word0, char *word1)
 {
 	switch (LIST_SORT_MODE) {
 	case LIST_SORT_BY_ASCII_ASC:
@@ -950,27 +933,36 @@ char LIST_word_compare(char *word0, char *word1)
 
 void LIST_auto_sort(LIST *list)
 {
-	int i, j, k, gap;
-	gap = list->eidc / 2;
-	while (gap > 0) {
-		for (k = 0; k < gap; k++) {
-			for (i = k + gap; i < list->eidc; i += gap) {
-				for (j = i - gap; j >= k; j -= gap) {
-					if (LIST_word_compare
-					    (LIST_get_mem_record(list, j),
-					     LIST_get_mem_record(list,
-								  j + gap)) ==
-					    0) {
-						LIST_swap_blklist_record(list,
-									  j,
-									  j +
-									  gap);
-					} else
-						break;
-				}
-			}
+	LIST_user_sort(list, 0, list->eidc - 1, LIST_word_compare);
+}
+
+void LIST_user_sort(LIST * list, int m, int n, int (*compare) (char *, char *))
+{
+	int i, j, k;
+	if (m < n) {
+		k = (m + n) / 2;
+		LIST_swap_blklist_record(list, m, k);
+		i = m + 1;
+		j = n;
+		while (i <= j) {
+			while ((i <= n)
+			       &&
+			       (compare
+				(LIST_get_mem_record(list, i),
+				 LIST_get_mem_record(list, m))))
+				i++;
+			while ((j >= m)
+			       &&
+			       (!compare
+				(LIST_get_mem_record(list, j),
+				 LIST_get_mem_record(list, m))))
+				j--;
+			if (i < j)
+				LIST_swap_blklist_record(list, i, j);
 		}
-		gap /= 2;
+		LIST_swap_blklist_record(list, m, j);
+		LIST_user_sort(list, m, j - 1, compare);
+		LIST_user_sort(list, j + 1, n, compare);
 	}
 }
 
