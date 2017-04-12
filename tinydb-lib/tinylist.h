@@ -2,8 +2,8 @@
 //#define  _LOW_LEVEL_CPU
 #define _32BIT_CPU
 //#define _64BIT_CPU
-#define IA32 4
-#define ARM 4
+#define IA32	4
+#define ARM		4
 
 #define PLATFORM_TYPE IA32
 //#define PLATFORM_TYPE ARM
@@ -34,9 +34,9 @@ unsigned char mode_flag :	0 1 2 3 4 5 6 7
 #define LIST_NO_Hash_table		0x00
 #define LIST_Hash_table_DI32	0x40
 #define LIST_Hash_table_QHASH	0x20
-#define LIST_pool_default_mode 0x00
-#define LIST_pool_compact_mode 0x00
-#define LIST_pool_blklist_mode 0x01
+#define LIST_pool_default_mode	0x00
+#define LIST_pool_compact_mode	0x00
+#define LIST_pool_blklist_mode	0x01
 /****************error_check****************/
 /*
 unsigned char error_check :	0 1 2 3 4 5 6 7
@@ -53,9 +53,9 @@ unsigned char error_check :	0 1 2 3 4 5 6 7
 */
 /*******************************************/
 #define LIST_NO_ERROR			0x00
-#define LIST_MEM_POOL_FULL	0x80
+#define LIST_MEM_POOL_FULL		0x80
 #define LIST_REFLECTION_FULL	0x40
-#define LIST_FILE_OPS_ERROR	0x08
+#define LIST_FILE_OPS_ERROR		0x08
 #define LIST_QHASH_ERROR		0x01
 #define LIST_INIT_FAILED		0x20
 
@@ -84,8 +84,8 @@ typedef struct {
 } LIST;
 
 #define LIST_default_item_length		1024
-#define LIST_default_aux_length	512
-#define LIST_default_record			4096
+#define LIST_default_aux_length			512
+#define LIST_default_record				4096
 #define LIST_min_item_length			5
 
 #define LIST_clear_mode_flag(list) list->mode_flag=0;
@@ -100,9 +100,15 @@ void LIST_print_debug_info(LIST list);
 //list//
 
 #define LIST_INFO_BUFFER 512
+
 void LIST_set_aux_blk(LIST *list, unsigned int aux_blk);
 
 void LIST_set_head(LIST *list, char *str);
+
+#define LIST_new_list LIST_new
+#define LIST_new_compact LIST_new_list_compact
+#define LIST_new_blklist LIST_new_list_blklist
+
 LIST LIST_new_list(unsigned int length, unsigned int nrecord,
 		   unsigned int aux_blk);
 LIST LIST_new_list_compact(unsigned int length, unsigned int aux_blk,
@@ -142,8 +148,8 @@ unsigned int LIST_search_by_aux(LIST *list, char *key);
 
 //hash di32//
 
-#define default_seed_di32 0
-#define LIST_HASH_DI32   4
+#define default_seed_di32	0
+#define LIST_HASH_DI32		4
 
 void LIST_set_hash_seed_di32(unsigned int seed);
 unsigned char LIST_hash_table_init(LIST *list, unsigned int length);
@@ -171,7 +177,7 @@ unsigned int LIST_search_bin_di32(LIST *list, char *str, unsigned int point,
 #define LIST_qhash_seed_max	254
 
 #define LIST_QHASH_ERROR_NO_ERROR 		0
-#define LIST_QHASH_ERROR_SEED_OVERFLOW 1
+#define LIST_QHASH_ERROR_SEED_OVERFLOW	1
 
 #ifdef HAVE_FILESYSTEM
 	void LIST_qhash_error_log(unsigned char error);
@@ -196,9 +202,9 @@ unsigned int LIST_qhash_search_bin(LIST *list, char *str,
 #define LIST_SORT_MODE_DEFAULT		0
 #define LIST_SORT_BY_ASCII			0
 #define LIST_SORT_BY_ASCII_ASC		0
-#define LIST_SORT_BY_ASCII_DESC	1
-#define LIST_SORT_BY_LENGTH		2
-#define LIST_SORT_BY_LENGTH_ASC	2
+#define LIST_SORT_BY_ASCII_DESC		1
+#define LIST_SORT_BY_LENGTH			2
+#define LIST_SORT_BY_LENGTH_ASC		2
 #define LIST_SORT_BY_LENGTH_DESC	3
 
 /*Before sorting ,you must set sort mode first ,using LIST_set_sort_mode*/

@@ -19,12 +19,9 @@
     #include "windows.h"
 #endif
 
-//common//
-
-#ifndef UNKNOWN_OPT
-	#define str_copy strcpy
-	#define str_length strlen
-#endif
+#define str_copy strcpy
+#define str_length strlen
+#define mem_copy memcpy
 
 #ifdef WIN_NT
 	#define _creat_directory mkdir
@@ -36,37 +33,6 @@
 	#define _remove_directory rmdir
 	#define getch getchar
 #endif
-
-#ifdef UNKNOWN_OPT
-	static int str_length(char *str)
-	{
-		int l = 0;
-		while (*str++)
-			l++;
-		return l;
-	}
-
-	/*
-	static int str_length(char *str){
-		char *str0=str;
-		while(*++str);
-		return str-str0;
-	}
-	*/
-	static void str_copy(char *str0, char *str1)
-	{
-		while ((*str0++ = *str1++) != '\0') ;
-	}
-
-	/*
-	static inline void str_copyi(char *str0,char *str1){
-		int *dest=str0,*src=str1;
-		while(*src&0xff)*dest++=*src++;
-	}
-	*/
-#endif
-
-#define mem_copy memcpy
 
 static void array_init(char *str, int length)
 {
@@ -148,7 +114,7 @@ static int block_key_compare(char *key1, char *key2, int block)
 	}
 #endif
 
-static char which_word_is_bigger(char *word0, char *word1)
+static char compare_by_ascii(char *word0, char *word1, int i0, int i1)
 {
 	int i = 0;
 	while (word0[i] == word1[i]) {
@@ -157,48 +123,33 @@ static char which_word_is_bigger(char *word0, char *word1)
 			return 2;	//word0==word1
 	}
 	if (word0[i] > word1[i])
-		return 0;	//word0>word1
+		return i0;	//word0>word1
 	else
-		return 1;	//word0<word1
+		return i1;	//word0<word1
 }
 
-static char which_word_is_smaller(char *word0, char *word1)
-{
-	int i = 0;
-	while (word0[i] == word1[i]) {
-		i++;
-		if (word0[i] == 0)
-			return 2;	//word0==word1
-	}
-	if (word0[i] > word1[i])
-		return 1;	//word0<word1
-	else
-		return 0;	//word0>word1
-}
+#define which_word_is_bigger(word0, word1) \
+compare_by_ascii(word0, word1, 0, 1)
+#define which_word_is_smaller(word0, word1) \
+compare_by_ascii(word0, word1, 1, 0)
 
-static char which_word_is_longer(char *word0, char *word1)
+static char compare_by_len(char *word0, char *word1, int i0, int i1)
 {
 	int l0 = str_length(word0);
 	int l1 = str_length(word1);
 	if (l0 > l1)
-		return 0;	//word0>word1
+		return i0;	//word0>word1
 	else if (l0 == l1)
 		return 2;	//word0==word1
 	else
-		return 1;	//word0<word1
+		return i1;	//word0<word1
 }
 
-static char which_word_is_shorter(char *word0, char *word1)
-{
-	int l0 = str_length(word0);
-	int l1 = str_length(word1);
-	if (l0 > l1)
-		return 1;	//word0<word1
-	else if (l0 == l1)
-		return 2;	//word0==word1
-	else
-		return 0;	//word0>word1
-}
+#define which_word_is_longer(word0, word1) \
+compare_by_len(word0, word1, 0, 1)
+
+#define which_word_is_shorter(word0, word1) \
+compare_by_len(word0, word1, 1, 0)
 
 static unsigned int DJBHashKey(char *key, unsigned int seed)
 {
