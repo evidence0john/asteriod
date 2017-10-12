@@ -1,0 +1,13 @@
+<script>
+	document.getElementById('head_login').style="display :none"
+	if(head_uname)
+		document.write(head_uname + ' 已登录' + '<a id=\"logout\">[注销]</a>');
+	else
+		window.location.href='login.lua'
+</script>
+
+<p>纂写新文章</p>
+
+<script>
+	document.getElementById('logout').href="logout.lua?"+getCookie('usr_id_name')+"&"+getCookie('usr_id_cookie');
+</script>

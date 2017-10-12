@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>demo.lua</title>
+<meta name="Generator" content="SciTE - www.Scintilla.org" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+.S0 {
+	color: #FF0000;
+	font-size: 10pt;
+}
+.S2 {
+	font-family: 'Bitstream Vera Serif';
+	color: #00DF00;
+	font-size: 9pt;
+}
+.S4 {
+	color: #007F7F;
+	font-size: 10pt;
+}
+.S5 {
+	color: #007FFF;
+	font-size: 10pt;
+}
+.S7 {
+	color: #FF007F;
+	font-size: 10pt;
+}
+.S10 {
+	color: #FFFFFF;
+	font-size: 10pt;
+}
+.S13 {
+	color: #FF55FF;
+	text-decoration: inherit;
+	font-size: 10pt;
+}
+.S100 {
+	color: #FFFFFF;
+	font-size: 14pt;
+}
+span {
+	font-family: 'Bitstream Vera Sans';
+	color: #FFFFFF;
+	font-size: 9pt;
+}
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+<span><span class="S100"><br>&nbsp;Hello word Example :</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S2">--创建新的 Accept 对象</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">local</span><span class="S0"> </span>index<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>new<span class="S10">(</span>Accept<span class="S10">)</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S2">--Hello world</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S13">print</span><span class="S10">(</span><span class="S7">'Hello world'</span><span class="S10">)</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">if</span><span class="S0"> </span>index.postlen<span class="S0"> </span><span class="S10">==</span><span class="S0"> </span><span class="S4">0</span><span class="S0"> </span><span class="S5">then</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S13">print</span><span class="S10">(</span><span class="S7">'Post Nothing'</span><span class="S10">)</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">else</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>word<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>index<span class="S10">:</span>getPostByName<span class="S10">(</span><span class="S7">'say'</span><span class="S10">)</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">if</span><span class="S0"> </span>word<span class="S0"> </span><span class="S5">then</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S13">print</span><span class="S10">(</span><span class="S7">'You said : '</span><span class="S10">,</span><span class="S0"> </span>word<span class="S10">)</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">else</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S13">print</span><span class="S10">(</span><span class="S7">'Something wrong'</span><span class="S10">)</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">end</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">end</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S2">--输出 Accept 对象的基本信息</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span>index<span class="S10">:</span>info<span class="S10">()</span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br />
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span></span>
+</body>
+</html>

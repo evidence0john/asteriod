@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<script src="cookies.js"></script>
+</head>
+<body id="top">
+<div class="wrapper row2">
+  <header id="header" class="clear"> 
+      <div id="logo" class="fl_left">
+        <h1><a href="index.lua"><strong>OpenLIC.xyz</strong></a></h1>
+      </div>
+  </header>
+</div>
+<div id="head_login" class="row3 right">
+	<script>
+		var head_uname = getCookie('usr_id_name')
+		if(head_uname)
+			document.write(head_uname + ' 已登录' + '<a href=\"mgmt.lua\">[管理]</a>');
+		else
+			document.write('<a href=\"login.lua\">[登录]</a>');
+	</script>
+</div>
+<div class="wrapper row3">
+  <main class="container clear"> 
+     <!-- main body -->

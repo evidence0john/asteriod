@@ -1,0 +1,6 @@
+ <div class="one_third">
+        <a href="index.lua"><img src="images/all.png" alt=""></img></a>
+      </div>
+    <h2 class="heading bold font-x2">&nbsp;&nbsp;Asteroid demo page</h2>
+    <p class="btmspace-50">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;asteroid 是使用 C/C++ 和 lua 实现的轻型服务器应用架构，内嵌小型数据库 tinydb，旨在实现简单高性能的 web 服务器应用</p>
+Asteroid，小行星，从这个名字上看，说明它很小，而且不稳定。小而轻巧是设计目标，而不稳定的原因是因为开发者是我～<br><br><br>

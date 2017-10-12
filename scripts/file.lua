@@ -1,0 +1,5 @@
+local file = new(Accept)
+file:info()
+local filename = file:filename()
+echo(filename)
+echo('<br>', (file:tofile('/home/evide/Desktop/'..filename)))

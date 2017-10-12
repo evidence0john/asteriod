@@ -1,0 +1,12 @@
+<center><img src="asteroid.jpg" style="width:30%;"></center><br>
+<center><h2 class="heading bold font-x2">登录成功</h2></center>
+<script src="cookies.js"></script>
+<script>
+	var cookie = document.getElementById('cookie');
+	var uname = document.getElementById('uname');
+	document.write("<center><h2>欢迎回来 "+uname.value+"</h2></center>");
+	setCookie('usr_id_name', uname.value);
+	setCookie('usr_id_cookie', cookie.value);
+	document.getElementById('head_login').style="display :none";
+	document.write('<center><h2><a href=\"mgmt.lua\">[管理]</a></h2></center>');
+</script>
