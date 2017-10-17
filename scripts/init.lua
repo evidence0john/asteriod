@@ -259,7 +259,7 @@ Simple_buffer = {
 		end
 		table.insert(self.article, body)
 		table.insert(self.head, head)
-		table.insert(self.head, tls_id)
+		table.insert(self.tls_id, id)
 		return #self.article
 	end,
 	['remove'] =

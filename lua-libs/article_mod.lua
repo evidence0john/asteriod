@@ -76,7 +76,7 @@ Article_Obj =
 			self:set_flag(1, rmid)
 			pointer = self.usr_buf:add(head, body, id)
 		end
-		print('write offset = ', offset)
+		--print('write offset = ', offset)
 		rec = string.char(2)..int64(offset)..int32(pointer)
 		ltls.write(rec, id, self.usr_rec_len)
 	end,
@@ -92,6 +92,7 @@ Article_Obj =
 			self:set_flag(1, rmid)
 			pointer = self.usr_buf:add(head, body, id)
 		end
+		self:set_CID(pointer, id)
 		self:set_flag(2, id)
 	end,
 	['head_info'] =
@@ -115,6 +116,7 @@ Article_Obj =
 		slen = self.fp:read('l')
 		len = tonumber(slen)
 		body = self.fp:read(len)
+		self.fp:seek('set', bpos)
 		return title..'\n'..editor..'\n'..time..'\n'..slen..'\n', body
 	end,
 	['Set'] =

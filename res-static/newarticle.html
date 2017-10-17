@@ -1,5 +1,5 @@
 <h2 class="heading bold font-x2">新文章</h2>
-<form action="post.lua" id='mainForm' method="post" enctype="multipart/form-data">
+<form action="newarticle.lua" id='mainForm' method="post" enctype="multipart/form-data">
 	<div>
 		<div id="letter">
 			<div class="">
@@ -9,6 +9,7 @@
 		<div id="comments">
 			<textarea name="body" rows="24"></textarea>
 			<input type="text" name="editor" id='uname' style="display: none">
+			<input type="text" name="cookie" id='cookie' style="display: none">
 			<div class="right">
 				<input type="submit" name="Send" value="发布" onclick="submit_form()">
 			</div>
@@ -19,6 +20,8 @@
 	function submit_form()
 	{
 		var uname = document.getElementById('uname');
-		uname.value = 'evidence0john';
+		var cookie = document.getElementById('cookie');
+		uname.value = getCookie('usr_id_name');
+		cookie.value = getCookie('usr_id_cookie');
 	}
 </script>

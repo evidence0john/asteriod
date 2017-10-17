@@ -6,12 +6,15 @@ echo(load_small_file(Global.spath..'head.html'))
 echo(load_small_file(Global.spath..'mgmt.html'))
 MyArticle:select_db()
 
-for i = 1, MyArticle.article_IDC do
+for i = MyArticle.article_IDC, 1, -1 do
 	local head, art = MyArticle:read_article(i)
+	--print(head)
 	if head ~= 'Deleted' then
 		local title, editor, time, slen = MyArticle:head_info(head)
 	end
-	echo(title..'&nbsp'..editor..'&nbsp'..os.date('%c', time))
+	echo('<a href=\"article.lua?', i, '\" target=\"_blank\">')
+	echo(title, '</a>')
+	echo('&nbsp'..editor..'&nbsp'..os.date('%x', time))
 	print(i)
 end
 

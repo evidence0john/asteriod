@@ -1,19 +1,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#438EDb"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <script src="cookies.js"></script>
 </head>
-<body id="top">
+
 <div class="wrapper row2">
   <header id="header" class="clear"> 
-      <div id="logo" class="fl_left">
-        <h1><a href="index.lua"><strong>OpenLIC.xyz</strong></a></h1>
-      </div>
+	<div id="logo" class="fl_left">
+    	<h1><a href="index.lua"><strong>OpenLIC.xyz</strong></a></h1>
+	</div>
+	<nav id="topbar">
+		<a class="btn bg-black-trans" href="index.lua">Home</a>&nbsp
+		<a class="btn bg-black-trans" href="asteroid.lua">Asteroid</a>&nbsp
+		<a class="btn bg-black-trans" href="index.lua">文章分类</a>&nbsp
+	</nav>
   </header>
 </div>
-<div id="head_login" class="row3 right">
+<div class="wrapper row3">
+ <div id="head_login" class="right">
 	<script>
 		var head_uname = getCookie('usr_id_name')
 		if(head_uname)
@@ -22,6 +29,5 @@
 			document.write('<a href=\"login.lua\">[登录]</a>');
 	</script>
 </div>
-<div class="wrapper row3">
   <main class="container clear"> 
      <!-- main body -->
