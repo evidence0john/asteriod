@@ -1,0 +1,27 @@
+<h2 class="heading bold font-x2">新文章</h2>
+<form action="newarticle.lua" id='mainForm' method="post" enctype="multipart/form-data">
+	<div>
+		<div id="letter">
+			<div class="">
+				<p>标题 <input type="text" name="title"></div></p>
+			</div>
+		</div>
+		<div id="comments">
+			<textarea name="body" rows="24"></textarea>
+			<input type="text" name="editor" id='uname' style="display: none">
+			<input type="text" name="cookie" id='cookie' style="display: none">
+			<div class="right">
+				<input type="submit" name="Send" value="发布" onclick="submit_form()">
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	function submit_form()
+	{
+		var uname = document.getElementById('uname');
+		var cookie = document.getElementById('cookie');
+		uname.value = getCookie('usr_id_name');
+		cookie.value = getCookie('usr_id_cookie');
+	}
+</script>

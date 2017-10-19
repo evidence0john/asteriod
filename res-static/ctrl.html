@@ -1,0 +1,95 @@
+<form action="ctrl.lua" id='mainForm' method="post" enctype="multipart/form-data">
+	<div id="ctrl">
+		<p>LED ID</p><!--<input type="text" style="width: 50%" id="led_Id" name="led_Id">-->
+		<input type="range" name="led_Id" id="led_Id" style="width: 50%;" min="1", max="4" onchange="IdRange();">
+		<input type="button" name="down_Val" value="up" onclick="Id_up();">
+		<input type="button" name="down_Val" value="down" onclick="Id_down();">
+		<br><br><br>
+		<p>Bright value</p><!--<input type="text" style="width: 50%" id="led_Val" name="led_Val">-->
+		<input type="range" name="led_Val" id="led_Val" style="width: 50%;" min="0", max="255" onchange="ValRange();">
+		<input type="button" name="up_Id" value="up" onclick="Val_up();">
+		<input type="button" name="down_Id" value="down" onclick="Val_down();">
+		<input type="text" id="IdChange" name="IdChange" style="display: none;" value="">
+		<input type="text" id="Close" name="Close" style="display: none;" value="">
+		<br><br><br>
+		<!--<input type="button" style="width: 40%" value="Main Set" onclick="Manipluation();">-->
+		<input type="button" id="lockswitch" style="width: 40%" value="lock-Val" onclick="Switch();">
+		<input type="button" style="width: 40%" value="Close All" onclick="CloseAll();">
+	</div>
+</form>
+<br><br><br>
+<script src="cookies.js"></script>
+<script>
+	var maxId = 4, minId = 1;
+	var maxVal = 255, minVal = 0;
+	var curId = minId, curVal = minVal;
+	var sVal = document.getElementById('sVal');
+	var sId = document.getElementById('sId');
+	if(getCookie('ctrl_led_lock') == null){
+		setCookie('ctrl_led_lock', 'unlock');
+	}
+	if(getCookie('ctrl_led_lock') == 'locked')
+		document.getElementById('lockswitch').value = "unlock-Val";
+	function Switch() {
+		if(getCookie('ctrl_led_lock') == 'locked'){
+			document.getElementById('lockswitch').value = "lock-Val";
+			setCookie('ctrl_led_lock', 'unlock');
+		} else {
+			document.getElementById('lockswitch').value = "unlock-Val";
+			setCookie('ctrl_led_lock', 'locked');
+		}
+	}
+	if (sVal) {
+		document.getElementById('led_Val').value = sVal.value;
+		document.getElementById('led_Id').value = sId.value;
+		curId = Number(sId.value);
+		curVal = Number(sVal.value);
+	}
+	function Id_up() {
+		if(curId + 1 <= maxId){
+			curId++;
+			document.getElementById('led_Id').value = curId;
+		}
+		if(getCookie('ctrl_led_lock') != 'locked')
+			document.getElementById('IdChange').value = 'update';
+		document.getElementById('mainForm').submit();
+	}
+	function Id_down() {
+		if(curId - 1 >= minId){
+			curId--;
+			document.getElementById('led_Id').value = curId;
+		}
+		if(getCookie('ctrl_led_lock') != 'locked')
+			document.getElementById('IdChange').value = 'update';
+		document.getElementById('mainForm').submit();
+	}
+	function Val_up() {
+		if(curVal + 10 <= maxVal){
+			curVal+=10;
+			document.getElementById('led_Val').value = curVal;
+		}
+		document.getElementById('mainForm').submit();
+	}
+	function Val_down() {
+		if(curVal - 10 >= minVal){
+			curVal-= 10;
+			document.getElementById('led_Val').value = curVal;
+		}
+		document.getElementById('mainForm').submit();
+	}
+	function Manipluation() {
+		document.getElementById('mainForm').submit();
+	}
+	function IdRange() {
+		if(getCookie('ctrl_led_lock') != 'locked')
+			document.getElementById('IdChange').value = 'update';
+		document.getElementById('mainForm').submit();
+	}
+	function ValRange() {
+		document.getElementById('mainForm').submit();
+	}
+	function CloseAll() {
+		document.getElementById('Close').value = 'true';
+		document.getElementById('mainForm').submit();
+	}
+</script>

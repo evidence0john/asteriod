@@ -17,6 +17,7 @@ int64 = fcgi.int64
 time33 = fcgi.time33
 md5 = fcgi.md5
 urldecoder = fcgi.urldecoder
+tagRemove = fcgi.tagRemove
 --
 
 Page_counter = {}

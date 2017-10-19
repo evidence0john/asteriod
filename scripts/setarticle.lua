@@ -16,5 +16,6 @@ else
 			['tlspath'] = './article_p0'
 		}
 	myconf.id = myid
-	MyArticle:Set('load', myconf)
+	--MyArticle:Set('load', myconf)
+	MyArticle:Set('new', myconf)
 end

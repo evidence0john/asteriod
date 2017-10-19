@@ -1,32 +1,16 @@
 local index = new(Accept)
 MyArticle:select_db()
 local reqID = index:Query()
-
+---------------head---------------
 echo(load_small_file(Global.spath..'head.html'))
-print(reqID)
-
+---------------head---------------
 local head, art = MyArticle:read_article(reqID)
-
+local title, editor, time, slen = MyArticle:head_info(head)
+echo('<title>'..title..'</title>')
+echo('<center><h2>'..title..'</h2></center>')
+print('<center><p>'..editor..os.date('%c', time)..'</p></center>')
 print(art)
-
-print(string.rep('<br>', 10))
-
-
-
-for i = 1, MyArticle.article_IDC do
-	local head, art = MyArticle:read_article(i)
-	if head ~= 'Deleted' then
-		local title, editor, time, slen = MyArticle:head_info(head)
-	end
-	echo(title..'&nbsp'..editor..'&nbsp'..os.date('%c', time))
-	print(i)
-end
-
-
-
-for k,v in pairs(Global) do
-	print(k,v)
-end
-print('End')
-
+---------------foot---------------
+print(string.rep('<br>', 3))
 echo(load_small_file(Global.spath..'foot.html'))
+---------------foot---------------

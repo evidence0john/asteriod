@@ -126,6 +126,8 @@ Article_Obj =
 			ltls.select(arg.id)
 			ltls.create(self.usr_rec_len, 0, arg.capacity)
 			ltls.name(arg.tlsname)
+			self:Set_fp(arg.dsrc)
+			self:Set_buf()
 			self.article_IDC = 0
 			ltls.write(int32(0), 0, 4, 0)
 			ltls.write(int32(self.article_IDC), 0, 4, 4)

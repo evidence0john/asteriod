@@ -2,16 +2,39 @@ local index = new(Accept)
 echo('<title>openlic.xyz</title>')
 counter_inc(index.script)
 echo(load_small_file(Global.spath..'head.html'))
-echo(load_small_file(Global.spath..'restart-asteroid.txt'))
-echo('<div id =\"comments\">')
-	echo('<div id =\"mainav\" class=\"two_third btn\">')
-		echo(load_small_file(Global.spath..'demo.html'))
-	echo('</div>')
-	echo('<div class=\"one_quarter fl_right \">')
-		print('当前页面和服务器信息：')
-		print('执行脚本：', fcgi.env('SCRIPT_NAME'))
-		print('访问计数器 = ', counter_get(index.script))
-		index:info()
-	echo('</div>')
-echo('</div><br>')
+echo(load_small_file(Global.spath..'home.html'))
+
+MyArticle:select_db()
+
+
+for i = MyArticle.article_IDC, 1, -1 do
+	local head, art = MyArticle:read_article(i)
+	--print(head)
+	if head ~= 'Deleted' then
+		local title, editor, time, slen = MyArticle:head_info(head)
+		echo('<hr><br>')
+		echo('<div id=\"absTitle\">')
+		echo('<a href=\"article.lua?', i, '\">')
+		local imgi, imgj = string.find(art, '<img.+>')
+		echo('<img src=\"')
+		if imgi then
+			local tag = string.sub(art, imgi, imgj)
+			imgi, imgj = string.find(tag, '\"[%w%p]+\"')
+			echo(string.sub(tag, imgi + 1, imgj -1))
+		else
+			echo('asteroid.jpg')
+		end
+		echo('\">')
+		echo('&nbsp', title, '</a>')
+		echo('<br>&nbsp'..editor..'&nbsp'..os.date('%x', time)..'<br>')
+		local abs = string.sub(art, 1, 400)
+		abs = tagRemove(abs)
+		abs = string.sub(abs, 1, 250)
+		if string.byte(string.sub(abs, #abs)) > 127 then
+			abs = string.sub(abs, 1, #abs - 1)
+		end
+		print('<p>', abs, '...</p>')
+		echo('</div>')
+	end
+end
 echo(load_small_file(Global.spath..'foot.html'))

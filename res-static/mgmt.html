@@ -6,7 +6,10 @@
 		window.location.href='login.lua'
 </script>
 <a href="newarticle.lua">纂写新文章</a><br>
-
+<form action="delart.lua" id='mainForm' method="post" enctype="multipart/form-data">
+	<input type="text" name="editor" id='uname' style="display: none">
+	<input type="text" name="cookie" id='cookie' style="display: none">
+</form>
 
 <script>
 	document.getElementById('logout').href="logout.lua?"+getCookie('usr_id_name')+"&"+getCookie('usr_id_cookie');
