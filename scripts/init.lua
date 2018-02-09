@@ -1,5 +1,5 @@
 ----------------settings----------------
-package.path = '/home/evide/Desktop/lua-site/lua-libs/?.lua'
+package.path = '/home/evide/C0D1NG/asteroid/lua-libs/?.lua'
 
 fcgi = require "fcgi"
 ltls = require "ltls"
@@ -22,8 +22,8 @@ tagRemove = fcgi.tagRemove
 
 Page_counter = {}
 Global = {}
-
-Global.spath = '/home/evide/Desktop/lua-site/res-static/' 
+Global.script_home = '/home/evide/C0D1NG/asteroid/scripts/'
+Global.spath = '/home/evide/C0D1NG/asteroid/res-static/' 
 
 setmetatable(Page_counter, 
 		{
@@ -303,5 +303,5 @@ end
 require("article_mod")
 ----------------------------------------------------
 
-dofile('/home/evide/Desktop/lua-site/scripts/usr_init.lua')
-dofile('/home/evide/Desktop/lua-site/scripts/setarticle.lua')
+dofile(Global.script_home..'usr_init.lua')
+dofile(Global.script_home..'setarticle.lua')

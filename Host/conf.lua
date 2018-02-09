@@ -1,3 +1,3 @@
 --script_home = '/usr/share/nginx/html/'
-script_home = '/home/evide/Desktop/lua-site/scripts/'
-init_script = '/home/evide/Desktop/lua-site/scripts/init.lua'
+script_home = '/home/evide/C0D1NG/asteroid/scripts/'
+init_script = '/home/evide/C0D1NG/asteroid/scripts/init.lua'

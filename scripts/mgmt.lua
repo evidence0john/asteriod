@@ -8,6 +8,7 @@ MyArticle:select_db()
 print('<br>当前记录器使用率：', MyArticle.article_IDC..'/', ltls.info(4))
 echo('<h2>文章列表：</h2>')
 print('Delete&nbsp&nbsp&nbspTitle&nbsp&nbsp&nbsp&nbspEditor&nbsp&nbsp&nbsp&nbspTime')
+echo('<div class=\"inline\">')
 for i = MyArticle.article_IDC, 1, -1 do
 	local head, art = MyArticle:read_article(i)
 	--print(head)
@@ -20,6 +21,7 @@ for i = MyArticle.article_IDC, 1, -1 do
 		print()
 	end
 end
+echo('</div>')
 echo('<br><h2>回收站：</h2>')
 for i = MyArticle.article_IDC, 1, -1 do
 	local head, art = MyArticle:read_article(i)

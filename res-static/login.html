@@ -1,5 +1,5 @@
 <h2 class="heading bold font-x2"></h2>
-<center><img src="asteroid.jpg" style="width:30%;"></center><br>
+<center><img src="asteroid.jpg" style="min-height: 200px; min-width: 200px; width:30%;"></center><br>
 <script src="cookies.js"></script>
 <script src="md5.js"></script>
 <script>
@@ -13,12 +13,8 @@
 </div>
 <form action="login.lua" id='mainForm' method="post" enctype="multipart/form-data">
 	<div>
-		<div id="letter">
-			<div class="">
-				<center><p>用户名<input type="text" id="uname" name="uname"></p></center><br>
-				<center><p>密　码<input type="password" id="passwd" name="passwd"></p></center>
-			</div>
-		</div>
+		<center><p>用户名<input type="text" id="uname" name="uname"></p></center><br>
+		<center><p>密　码<input type="password" id="passwd" name="passwd"></p></center>
 	</div>
 </form>
 
@@ -38,7 +34,7 @@
 	function submit_form()
 	{
 		var passwd = document.getElementById('passwd');
-		passwd.value = MD5(passwd.value);
+		passwd.value = md5(passwd.value);
 		document.getElementById('mainForm').submit();
 	}
 </script>
