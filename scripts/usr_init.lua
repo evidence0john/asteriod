@@ -1,5 +1,5 @@
 Global.usr_list = {
-	['evi'] = '7d6d121fd6142feb09b7028732b6e84f'
+	[''] = ''
 }
 Global.usr_cookie = {}
 Usr_set_cookie = 

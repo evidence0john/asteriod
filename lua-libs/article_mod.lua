@@ -45,9 +45,9 @@ Article_Obj =
 	['select_db'] =
 	function (self, id)
 		if id then
-			ltls.select(id)
+			ltls.use(id)
 		else
-			ltls.select = self.database_id
+			ltls.use(self.database_id)
 		end
 	end,
 	['set_flag'] =
@@ -123,7 +123,7 @@ Article_Obj =
 	function (self, mod, arg)
 		if mod == 'new' then
 			print('create')
-			ltls.select(arg.id)
+			ltls.use(arg.id)
 			ltls.create(self.usr_rec_len, 0, arg.capacity)
 			ltls.name(arg.tlsname)
 			self:Set_fp(arg.dsrc)
@@ -134,7 +134,7 @@ Article_Obj =
 			print('Created new article manager')
 		elseif mod =='load' then
 			self.database_id = arg.id
-			ltls.select(self.database_id)
+			ltls.use(self.database_id)
 			ltls.import(arg.tlspath)
 			self:Set_fp(arg.dsrc)
 			self:Set_buf()

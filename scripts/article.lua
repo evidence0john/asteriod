@@ -12,5 +12,6 @@ print('<center><p>'..editor..os.date('%c', time)..'</p></center>')
 print(art)
 ---------------foot---------------
 print(string.rep('<br>', 3))
+print('<strong><em>暂不支持评论</em></strong>')
 echo(load_small_file(Global.spath..'foot.html'))
 ---------------foot---------------

@@ -1,9 +1,13 @@
 ----------------settings----------------
-package.path = '/home/evide/C0D1NG/asteroid/lua-libs/?.lua'
-
+package.path = '/home/evide/asteroid/lua-libs/?.lua'
+Global = {}
+Global.script_home = '/home/evide/asteroid/scripts/'
+Global.spath = '/home/evide/asteroid/res-static/'
+---------------initialize---------------
 fcgi = require "fcgi"
 ltls = require "ltls"
 require "luaoo"
+require "traverse"
 --fcgi lib
 print = fcgi.print
 echo = fcgi.echo
@@ -19,11 +23,7 @@ md5 = fcgi.md5
 urldecoder = fcgi.urldecoder
 tagRemove = fcgi.tagRemove
 --
-
 Page_counter = {}
-Global = {}
-Global.script_home = '/home/evide/C0D1NG/asteroid/scripts/'
-Global.spath = '/home/evide/C0D1NG/asteroid/res-static/' 
 
 setmetatable(Page_counter, 
 		{
