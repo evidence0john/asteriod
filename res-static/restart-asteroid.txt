@@ -1,8 +1,0 @@
- <div class="one_third">
-        <a href="index.lua"><img src="images/all.png" alt=""></img></a>
-      </div>
-    <h2 class="heading bold font-x2">&nbsp;&nbsp;Asteroid demo page</h2>
-    <p class="">lua 由 ANSI C 编写而成，代码简洁优美，几乎在所有操作系统和平台上都可以编译，运行。 一个完整的 lua 解释器不过 200k，在目前所有脚本引擎中，lua 的速度是最快的。<br>c/c++/lua 适合完成高性能，低资源开销的应用。阿里就采用了 c/c++/lua 实现的服务器架构。大概做法就是将 lua 嵌入 nginx：<a href=" ">https://github.com/openresty/lua-nginx-module</a ><br>
-asteroid 希望提供更轻型的 HTTP 服务，能够支持于高性能的简单 web 服务。lua （官方解释器）本身是 ANSI C 实现的，几乎兼容所有 32 位以上计算机架构，并且能够在多种嵌入式系统上编译运行，asteroid 采用 c/c++/lua 编写，嵌入 HTTP 服务器和简单数据库，则使之能够在多种就行嵌入式环境中运行，不依赖操作系统和其他软件。
-<br>*计划嵌入 mongoose 服务器，尚未添加支持，目前仍使用 fastCGI 实现<a href="https://github.com/cesanta/mongoose">https://github.com/cesanta/mongoose</a > <br>*tinylist 用于实现一个简单的能够当做数据库使用的数据管理工具，仍在开发<a href="https://github.com/evidence0john/tinylist">https://github.com/evidence0john/tinylist</a ></p>
-Asteroid，小行星，从这个名字上看，说明它很小，而且不稳定。小而轻巧是设计目标，而不稳定的原因是因为开发者是 evi ...<br><br><br>
