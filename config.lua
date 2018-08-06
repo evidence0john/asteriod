@@ -13,12 +13,12 @@ native_keyword = '/native/'
 lState_match = 'prefix'
 lState_keyword = '/lua/'
 lState_init = './init.lua'
-lState_home = '.'
+lState_home = '/home/evide/C0D1NG/asteroid_home/home/'
 
 --common http server settings, ref: mongoose http server options
-document_root = '.'
---index_files = 'index.html,index.php'
-index_files = ''
+document_root = '/home/evide/C0D1NG/asteroid_home/home/'
+--document_root = '.'
+index_files = 'index.html'
 enable_directory_listing = 'yes'
 cgi_file_pattern = ""
 --cgi_interpreter =
