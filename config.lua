@@ -13,7 +13,7 @@ native_keyword = '/native/'
 lState_match = 'prefix'
 lState_keyword = '/lua/'
 lState_init = './init.lua'
-lState_home = '/home/evide/C0D1NG/asteroid_home/home/'
+lState_home = '.'
 
 --common http server settings, ref: mongoose http server options
 document_root = '/home/evide/C0D1NG/asteroid_home/home/'

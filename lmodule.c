@@ -63,6 +63,38 @@ __1st_cycle:
 	return 0;
 }*/
 
+#define DECODE_FLAG '%'
+#define DECODE_NBSP '+'
+#define BLANK_SPACE 32
+
+int urldecoder(lua_State *L)
+{
+	const char *r = lua_tostring(L, 1);
+	int len = strlen(r) + 1;
+	char *s = (char*)malloc(len);
+	if (!s)
+		lua_pushnil(L);
+	char *p = s;
+	int i;
+	while(*r){
+		if(*r == DECODE_FLAG){
+			sscanf(++r, "%2x", &i);
+			r += 2;
+			*p++ = i;
+		}
+		else if(*r == DECODE_NBSP){
+			*p++ = BLANK_SPACE;
+			r++;
+		}
+		else
+			*p++ = *r++;
+	}
+	*p = 0;
+	lua_pushstring(L, s);
+	free(s);
+	return 1;
+}
+
 int http_msg_buf_echo(lua_State *L)
 {
 	char *p = NULL;
@@ -73,6 +105,12 @@ int http_msg_buf_echo(lua_State *L)
 		strcpy(bp, p);
 		http_msg_len += strlen(p);
 	}
+	return 0;
+}
+
+int http_msg_buf_clear(lua_State *L)
+{
+	http_msg_len = 0;
 	return 0;
 }
 
@@ -244,6 +282,14 @@ int http_content_type(lua_State *L)
 	return 1;
 }
 
+int stderr_log(lua_State *L)
+{
+	int i = 1;
+	while (lua_tostring(L, i))
+		fprintf(stderr, "%s\n", lua_tostring(L, i++));
+	return 0;
+}
+
 static luaL_Reg libs[] = {
 	/*
 	Returns full http request message
@@ -310,6 +356,20 @@ static luaL_Reg libs[] = {
 	Usage: b_flush([content_type])
 	*/
 	{"b_flush", http_msg_buf_flush},
+	/*
+	Usage: b_flush([content_type])
+	*/
+	{"b_clear", http_msg_buf_clear},
+	/*
+	Usage: stderr_log([str1, str2, ...])
+	Print to stderr
+	*/
+	{"stderr_log", stderr_log},
+	/*
+	Usage: urldecoder(str)
+	URL decoder
+	*/
+	{"urldecoder", urldecoder},
 	{NULL, NULL}
 };
 

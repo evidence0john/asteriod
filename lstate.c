@@ -51,7 +51,8 @@ void asteroid_lState_http_request_handler
 	luaL_dostring(L, "pcall(__Accept__)");
 	if (luaL_dofile(L, script)) {
 		mg_send_head(c, 200, strlen(script) + 11, "Content-Type: text/plain");
-		mg_printf(c, "Cannot run %s", script);	
+		mg_printf(c, "Cannot run %s", script);
+		luaL_dostring(L, "pcall(l.b_clear)");
 	}
 	luaL_dostring(L, "pcall(__Finished__)");
 }
