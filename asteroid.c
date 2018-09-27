@@ -38,6 +38,8 @@ extern int load_conf(const char *filename);
 /*Configure asteroid*/
 int cfg_open_native;
 int cfg_open_lState;
+int lState_match_mod;
+int native_match_mod;
 int cfg_asteroid_http_mode;
 const char *s_http_port;
 const char *cfg_native_match;
@@ -49,10 +51,10 @@ const char *cfg_native_lib;
 int (*native_match)(struct mg_str *, const char*);
 int (*lState_match)(struct mg_str *, const char*);
 
-void *asteroid_native_lib_handle;
+void *asteroid_native_lib_handler;
 
 void (*asteroid_native_http_request_handler)
-	(struct mg_connection *c, struct http_message *hm);
+	(struct mg_connection *c, struct http_message *hm, char *rewrite);
 
 void asteroid_host_init(const char *cfg_file)
 {
@@ -72,29 +74,33 @@ void asteroid_host_init(const char *cfg_file)
 	}
 	//If support native app 
 	if (cfg_open_native) {
-		if (!strcmp(cfg_native_match, "prefix"))
+		if (!strcmp(cfg_native_match, "prefix")) {
+			native_match_mod = PREFIX;
 			native_match = mg_str_prefix_match;
-		else if (!strcmp(cfg_native_match, "suffix"))
+		} else if (!strcmp(cfg_native_match, "suffix")) {
+			native_match_mod = SUFFIX;
 			native_match = mg_str_suffix_match;
-		else {
+		} else {
 			fprintf(stderr, "init fault %d\n", ASTEROID_ERR_CONFIG);
 			exit(ASTEROID_ERR_CONFIG);
 		}
-		asteroid_native_lib_handle = dlopen(cfg_native_lib, RTLD_LAZY);
-		if (!asteroid_native_lib_handle) {
+		asteroid_native_lib_handler = dlopen(cfg_native_lib, RTLD_LAZY);
+		if (!asteroid_native_lib_handler) {
 			fprintf (stderr, "%s\n", dlerror());
 			exit(ASTEROID_ERR_LOAD_SO);
 		}
-		asteroid_native_http_request_handler = dlsym(asteroid_native_lib_handle,
-			"asteroid_native_http_request_handler");
+		asteroid_native_http_request_handler = dlsym(asteroid_native_lib_handler,
+			"asteroid_native_http_request");
 	}
 	//If support local lua state
 	if (cfg_open_lState) {
-		if (!strcmp(cfg_lState_match, "prefix"))
+		if (!strcmp(cfg_lState_match, "prefix")) {
+			lState_match_mod = PREFIX;
 			lState_match = mg_str_prefix_match;
-		else if (!strcmp(cfg_lState_match, "suffix"))
+		} else if (!strcmp(cfg_lState_match, "suffix")) {
+			lState_match_mod = SUFFIX;
 			lState_match = mg_str_suffix_match;
-		else {
+		} else {
 			fprintf(stderr, "init fault %d\n", ASTEROID_ERR_CONFIG);
 			exit(ASTEROID_ERR_CONFIG);
 		}

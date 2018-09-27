@@ -10,6 +10,8 @@
 //ref: asteroid.c
 extern int cfg_open_native;
 extern int cfg_open_lState;
+extern int lState_match_mod;
+extern int native_match_mod;
 extern const char *cfg_native_match;
 extern const char *cfg_native_keyword;
 extern const char *cfg_native_lib;

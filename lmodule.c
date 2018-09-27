@@ -194,7 +194,7 @@ int http_host(lua_State *L)
 	lua_getglobal(L, LS_HTTP_MSG_P_NAME);
 	struct http_message *hm = *(struct http_message **)lua_touserdata(L, -1);
 	segment_cpy(host_name, hm->message.p, 1, '\n');
-	lua_pushstring(L, host_name + 6); // 6 equ to strlen("HOST: ")
+	lua_pushlstring(L, host_name + 6, strlen(host_name + 6) - 1); // 6 equ to strlen("HOST: ")
 	return 1;
 }
 
@@ -289,6 +289,24 @@ int stderr_log(lua_State *L)
 		fprintf(stderr, "%s\n", lua_tostring(L, i++));
 	return 0;
 }
+ 
+int md5_string(lua_State * L)
+{
+	char *str = (char*)lua_tostring(L, 1);
+	cs_md5_ctx md5;
+	unsigned char decrypt[16], fmd5[33];
+	char *p = fmd5;
+	int i;
+	cs_md5_init(&md5);
+	cs_md5_update(&md5, str, strlen(str));
+	cs_md5_final(decrypt, &md5);
+	for (i = 0; i < 16; i++) {
+		sprintf(p, "%02x", decrypt[i]);
+		p += 2;
+	}
+	lua_pushstring(L, fmd5);
+	return 1;
+}
 
 static luaL_Reg libs[] = {
 	/*
@@ -365,11 +383,17 @@ static luaL_Reg libs[] = {
 	Print to stderr
 	*/
 	{"stderr_log", stderr_log},
+	/************* util *************/
 	/*
 	Usage: urldecoder(str)
 	URL decoder
 	*/
-	{"urldecoder", urldecoder},
+	{"urldecoder", urldecoder},	
+	/*
+	Usage: md5(str)
+	Calc string's md5 hash
+	*/
+	{"md5", md5_string},
 	{NULL, NULL}
 };
 

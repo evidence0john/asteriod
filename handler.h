@@ -16,9 +16,13 @@ HOST_
 #define ASTEROID_HTTP_WITH_NAV 01
 #define ASTEROID_HTTP_WITH_LUA 10
 
+#define PREFIX 1
+#define SUFFIX 2
+
 typedef void* function;
 
 void asteroid_handler(struct mg_connection *c, int ev, void *p);
+void request(struct mg_connection *c, struct http_message *hm);
 void request_scheduler(struct mg_connection *c, struct http_message *hm);
 int mg_str_prefix_match(struct mg_str *s, const char *prefix);
 int mg_str_suffix_match(struct mg_str *s, const char *suffix);

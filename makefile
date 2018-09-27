@@ -1,7 +1,7 @@
 cc = gcc
 
-demo.so: example_module.c
-	$(cc) -o demo.so example_module.c mongoose.c -shared -fPIC
+demo.so: example_module.c handler.h handler.c
+	$(cc) -o demo.so example_module.c mongoose.c handler.c asteroid.c -shared -fPIC
 
 lmodule.so: lmodule.c
 	$(cc) -o lmodule.so lmodule.c mongoose.c -llua -shared -fPIC

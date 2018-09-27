@@ -8,17 +8,18 @@ will be ignored while loading configurations
 ]]
 native_lib = './demo.so'
 native_match = 'prefix'
-native_keyword = '/native/'
+native_keyword = '/native'
 --local lua state settings
-lState_match = 'prefix'
-lState_keyword = '/lua/'
+lState_match = 'suffix'
+lState_keyword = '.lua'
 lState_init = './init.lua'
-lState_home = '.'
+lState_home = './lua/'
 
 --common http server settings, ref: mongoose http server options
-document_root = '/home/evide/C0D1NG/asteroid_home/home/'
 --document_root = '.'
-index_files = 'index.html'
+document_root = '/home/evide/asteroid/home/'
+--index_files = 'index.html'
+index_files = 'native'
 enable_directory_listing = 'yes'
 cgi_file_pattern = ""
 --cgi_interpreter =

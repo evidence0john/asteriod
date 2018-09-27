@@ -8,7 +8,7 @@ const char *cfg_lState_keyword;
 struct mg_serve_http_opts cfg_s_http_server_opts;
 
 extern void (*asteroid_native_http_request_handler)
-	(struct mg_connection *c, struct http_message *hm);
+	(struct mg_connection *c, struct http_message *hm, char *rewrite);
 
 //extern void (*asteroid_lState_http_request_handler)
 //	(struct mg_connection *c, struct http_message *hm);
@@ -16,25 +16,42 @@ extern void (*asteroid_native_http_request_handler)
 extern int (*native_match)(struct mg_str *, const char*);
 extern int (*lState_match)(struct mg_str *, const char*);
 
+static char uri_rewrite[2048] = {0};
+static struct mg_str uri_rewrite_str;
+static char uri_rewrite_flag = 0;
+
 void request(struct mg_connection *c, struct http_message *hm)
 {
+	uri_rewrite[0] = 0;
+	uri_rewrite_flag = 0;
+URI_REWRITE:
 	switch (cfg_asteroid_http_mode) {
 		case ASTEROID_HTTP_FULL_ON:
 			if (!native_match(&hm->uri, cfg_native_keyword))
-					asteroid_native_http_request_handler(c, hm);
+					asteroid_native_http_request_handler(c, hm, uri_rewrite);
 				else if (!lState_match(&hm->uri, cfg_lState_keyword))
 					asteroid_lState_http_request_handler(c, hm);
-				else
-					mg_serve_http(c, hm, cfg_s_http_server_opts);
+				else {
+					if (hm->uri.len == 1 &&
+						!strcmp(cfg_s_http_server_opts.index_files, "native"))
+						asteroid_native_http_request_handler(c, hm, uri_rewrite);
+					else
+						mg_serve_http(c, hm, cfg_s_http_server_opts);
+				}
 			break;
 		case ASTEROID_HTTP_ORIGINAL:
 			mg_serve_http(c, hm, cfg_s_http_server_opts);
 			break;
 		case ASTEROID_HTTP_WITH_NAV:
 			if (!native_match(&hm->uri, cfg_native_keyword))
-					asteroid_native_http_request_handler(c, hm);
-			else
-				mg_serve_http(c, hm, cfg_s_http_server_opts);
+					asteroid_native_http_request_handler(c, hm, uri_rewrite);
+			else {
+				if (hm->uri.len == 1 &&
+					!strcmp(cfg_s_http_server_opts.index_files, "native"))
+					asteroid_native_http_request_handler(c, hm, uri_rewrite);
+				else
+					mg_serve_http(c, hm, cfg_s_http_server_opts);
+			}
 			break;
 		case ASTEROID_HTTP_WITH_LUA:
 			if (!native_match(&hm->uri, cfg_lState_keyword))
@@ -42,6 +59,16 @@ void request(struct mg_connection *c, struct http_message *hm)
 			else
 				mg_serve_http(c, hm, cfg_s_http_server_opts);
 			break;
+	}
+	/*
+	URI rewrite
+	*/
+	if (uri_rewrite[0] && !uri_rewrite_flag) {
+		uri_rewrite_str.p = uri_rewrite;
+		uri_rewrite_str.len = strlen(uri_rewrite);
+		hm->uri = uri_rewrite_str;
+		uri_rewrite_flag = 1;
+		goto URI_REWRITE;
 	}
 }
 

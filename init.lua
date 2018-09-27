@@ -8,8 +8,11 @@ print = function (...)
 	echo(...)
 	echo('<br>')
 end
+--flush buffer
 flush = l.b_flush
+--clear buffer
 clear = l.b_clear
+--print string to stderr
 log = l.stderr_log
 --Http request environment
 env = {}
@@ -86,6 +89,10 @@ end
 --getPostByName(body, name[, boundary])
 --getPostFileName(body, name, boundary)
 --savePostFile(body, name, boundary, path[, fname])
+--md5(str)
+--load_file(file)
+
+md5 = l.md5
 
 function _getPostByNameM(body, name, boundary) --multi
 	local b = '--'..boundary
@@ -200,6 +207,16 @@ function savePostFile(body, name, boundary, path, fname)
 	return nil --'nofound'..name
 end
 
+function load_file(file)
+	local fp = io.open(file, "r")
+	if not fp then
+		return nil
+	end
+	local buf = fp:read("a")
+	io.close(fp)
+	return buf
+end
+
 --[[function __Accept__( ... )
 	-- body
 end]]
@@ -207,3 +224,46 @@ end]]
 --[[function __Finished__()
 	flush()
 end]]
+
+
+--[[
+------------------------------------------------
+-------------------  Global  -------------------
+------------------------------------------------
+Global = {}
+
+--Global.HtmlHome = ''
+
+Global.UserCookie =
+{
+	['uname'] = ''
+}
+
+Global.UserList =
+{
+	['uname'] = '0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C0C'
+}
+------------------------------------------------
+--------------------- Extra --------------------
+------------------------------------------------
+function isFileExist(filename)
+	local fp = io.open(filename, 'r')
+	if fp then
+		io.close(fp)
+		return true
+	else
+		return false
+	end
+end
+
+ltls = require('ltls')
+ltfms = require('ltfms')
+
+if isFileExist('article_list') then
+	Global.ArticleList = ltls.import('article_list')
+else
+	Global.ArticleList = ltls.new(8192)
+end
+
+Global.ArticleTfms = ltfms.load_tfms('testFs')
+]]
